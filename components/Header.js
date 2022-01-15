@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 
-const Header = () => {
+const Header = ({ sendCrypto }) => {
   return (
     <Wrapper>
       <Title>Assets</Title>
       <ButtonsContainer>
+        <Button onClick={() => sendCrypto()}>Send / Receive</Button>
         <Button style={{ backgroundColor: '#3773f5', color: '#000' }}>
           Buy / Sell
         </Button>

@@ -9,12 +9,12 @@ const Portfolio = () => {
     <Wrapper>
       <Content>
         <Chart>
-          <ChartTop>
+          <div>
             <Balance>
               <BalanceTitle>Portfolio balance</BalanceTitle>
               <BalanceValue>$0.00</BalanceValue>
             </Balance>
-          </ChartTop>
+          </div>
           <BalanceChart />
         </Chart>
         <PortfolioTable>
@@ -25,24 +25,24 @@ const Portfolio = () => {
           <Table>
             <TableItem>
               <TableRow>
-                <th style={{ flex: 3 }}>Name</th>
-                <th style={{ flex: 2 }}>Balance</th>
-                <th style={{ flex: 1 }}>Price</th>
-                <th style={{ flex: 1 }}>Allocation</th>
-                <th style={{ flex: 0, color: '#0a0b0d' }}>
+                <div style={{ flex: 3 }}>Name</div>
+                <div style={{ flex: 2 }}>Balance</div>
+                <div style={{ flex: 1 }}>Price</div>
+                <div style={{ flex: 1 }}>Allocation</div>
+                <div style={{ flex: 0, color: '#0a0b0d' }}>
                   <BsThreeDotsVertical />
-                </th>
+                </div>
               </TableRow>
             </TableItem>
             <Divider />
-            <tbody>
+            <div>
               {coins.map(coin => (
-                <>
-                  <Coin key={coin.name} coin={coin} />
+                <div key={coin.name}>
+                  <Coin coin={coin} />
                   <Divider />
-                </>
+                </div>
               ))}
-            </tbody>
+            </div>
           </Table>
         </PortfolioTable>
       </Content>
@@ -78,21 +78,19 @@ const BalanceTitle = styled.div`
 const BalanceValue = styled.div`
   font-size: 1.8rem;
   font-weight: 700;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0;
 `
-
-const ChartTop = styled.div``
 
 const PortfolioTable = styled.div`
   margin-top: 1rem;
   border: 1px solid #282b2f;
 `
 
-const Table = styled.table`
+const Table = styled.div`
   width: 100%;
 `
 
-const TableRow = styled.tr`
+const TableRow = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;

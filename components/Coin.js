@@ -6,8 +6,8 @@ import Image from 'next/image'
 const Coin = ({ coin }) => {
   return (
     <Wrapper>
-      <tr>
-        <td style={{ flex: 3 }}>
+      <div>
+        <div style={{ flex: 3 }}>
           <NameCol>
             <CoinIcon>
               <Image src={coin.logo} alt={coin.name} />
@@ -17,8 +17,8 @@ const Coin = ({ coin }) => {
               <Secondary>{coin.sign}</Secondary>
             </div>
           </NameCol>
-        </td>
-        <td style={{ flex: 2 }}>
+        </div>
+        <div style={{ flex: 2 }}>
           <Primary>
             {'$'}
             {coin.balanceUsd}
@@ -26,8 +26,8 @@ const Coin = ({ coin }) => {
           <Secondary>
             {coin.balanceCoin} {coin.sign}
           </Secondary>
-        </td>
-        <td style={{ flex: 1 }}>
+        </div>
+        <div style={{ flex: 1 }}>
           <Primary>
             {'$'}
             {coin.priceUsd}
@@ -36,12 +36,12 @@ const Coin = ({ coin }) => {
             {coin.change > 0 && '+'}
             {coin.change}%
           </div>
-        </td>
-        <td style={{ flex: 1 }}>{coin.allocation}%</td>
-        <td style={{ flex: 0 }}>
+        </div>
+        <div style={{ flex: 1 }}>{coin.allocation}%</div>
+        <div style={{ flex: 0 }}>
           <BsThreeDotsVertical />
-        </td>
-      </tr>
+        </div>
+      </div>
     </Wrapper>
   )
 }
@@ -54,7 +54,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  & tr {
+  & > div {
     width: 100%;
     display: flex;
     justify-content: space-between;
