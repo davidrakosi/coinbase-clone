@@ -8,9 +8,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@svgr/webpack": "^6.2.0",
+    "babel-plugin-styled-components": "^2.0.2",
+    "chart.js": "^3.7.0",
+    "crypto-icons": "^1.0.65",
+    "cryptocurrency-icons": "^0.18.0",
     "next": "12.0.8",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-chartjs-2": "^4.0.0",
+    "react-crypto-icons": "^1.0.5",
+    "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "eslint": "8.6.0",
