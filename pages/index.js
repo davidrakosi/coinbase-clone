@@ -7,15 +7,25 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 
 export default function Home() {
+  const [myToken, setMyToken] = useState(null)
+
   const sendCrypto = async () => {
+    const toAddress = '0x8Cd390f697ffDc176f1B70D2F3BB3083698434fD'
     console.log('sending crypto')
+
+    if (myToken) {
+      console.log('object')
+      const result = await myToken.transfer(toAddress, '1000000000000000000')
+
+      console.log(result)
+    }
   }
 
-  const getBalance = async token => {
-    const balance = await token.balanceOf(
+  const getBalance = async () => {
+    console.log(myToken, '🔥')
+    const balance = await myToken.balanceOf(
       '0xB4EbD453D80A01A0dC7De077c61B1c9b336F05E3',
     )
-
     console.log(await balance)
   }
 
@@ -31,14 +41,24 @@ export default function Home() {
 
     console.log(sdk)
 
-    const token = sdk.getTokenModule(
-      '0x114F6884005a5a818fFC51C464E5b802a6E07771',
-    )
+    // const tokenId = '0xB4EbD453D80A01A0dC7De077c61B1c9b336F05E3' // MATIC
+    const tokenId = '0x114F6884005a5a818fFC51C464E5b802a6E07771' // MTK
 
-    console.log(token)
+    const token = sdk.getTokenModule(tokenId)
 
-    getBalance(token)
+    setMyToken(token)
+
+    // console.log(token)
+
+    // getBalance(token)
   }, [])
+
+  useEffect(() => {
+    if (myToken) {
+      console.log(Boolean(myToken), '🚀')
+      getBalance()
+    }
+  }, [myToken])
 
   return (
     <Wrapper>
