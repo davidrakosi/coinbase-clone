@@ -32,17 +32,14 @@ export default function Home() {
   useEffect(() => {
     const sdk = new ThirdwebSDK(
       new ethers.Wallet(
-        // Your wallet private key
         process.env.NEXT_PUBLIC_PRIVATE_KEY,
-        // RPC URL, we'll use Polygon Mumbai
         ethers.getDefaultProvider('https://rpc-mumbai.maticvigil.com'),
       ),
     )
 
     console.log(sdk)
 
-    // const tokenId = '0xB4EbD453D80A01A0dC7De077c61B1c9b336F05E3' // MATIC
-    const tokenId = '0x114F6884005a5a818fFC51C464E5b802a6E07771' // MTK
+    const tokenId = '0x11Bdf1177E465D3a299FAD35051BFb553974cb3A' // CPT
 
     const token = sdk.getTokenModule(tokenId)
 
@@ -64,7 +61,7 @@ export default function Home() {
     <Wrapper>
       <Sidebar />
       <MainContainer>
-        <Header sendCrypto={sendCrypto} />
+        <Header sendCrypto={sendCrypto} myToken={myToken} />
         <Main />
       </MainContainer>
     </Wrapper>
