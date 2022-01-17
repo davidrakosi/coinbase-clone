@@ -16,6 +16,17 @@ const Transfer = ({ setAction, twTokens, sanityTokens, selectedToken }) => {
   const [imageUrl, setImageUrl] = useState(null)
   const [balance, setBalance] = useState('Fetching...')
 
+  console.log('🤖', twTokens)
+  console.log('🚀', sanityTokens)
+
+  useEffect(() => {
+    twTokens.map(token => {
+      if (token.address === selectedToken.contractAddress) {
+        setActiveTwToken(token)
+      }
+    })
+  }, [twTokens, selectedToken])
+
   useEffect(() => {
     const getBalance = async () => {
       const balance = await activeTwToken.balanceOf(sender)
@@ -26,14 +37,6 @@ const Transfer = ({ setAction, twTokens, sanityTokens, selectedToken }) => {
       getBalance()
     }
   }, [activeTwToken])
-
-  useEffect(() => {
-    twTokens.map(token => {
-      if (token.address === selectedToken.contractAddress) {
-        setActiveTwToken(token)
-      }
-    })
-  }, [twTokens, selectedToken])
 
   useEffect(() => {
     const url = builder.image(selectedToken.logo.asset._ref).url()

@@ -10,9 +10,6 @@ export default function Home({ data }) {
   const [twTokens, setTwTokens] = useState([])
   const [sanityTokens, setSanityTokens] = useState(data)
 
-  console.log('🤖', twTokens)
-  console.log('🛠️', sanityTokens)
-
   useEffect(() => {
     const sdk = new ThirdwebSDK(
       new ethers.Wallet(
@@ -33,19 +30,16 @@ export default function Home({ data }) {
       <Sidebar />
       <MainContainer>
         <Header twTokens={twTokens} sanityTokens={sanityTokens} />
-        <Main />
+        <Main twTokens={twTokens} sanityTokens={sanityTokens} />
       </MainContainer>
     </Wrapper>
   )
 }
 
 export async function getServerSideProps(context) {
-  console.log('server')
-
   const getCoinsList = async () => {
-    console.log('sanity')
     const coins = await fetch(
-      "https://u5i352de.api.sanity.io/v1/data/query/production?query=*%5B_type%20%3D%3D%20'coins'%5D%20%7B%0A%20%20name%2C%0A%20%20symbol%2C%0A%20%20contractAddress%2C%0A%20%20logo%0A%7D",
+      'https://u5i352de.api.sanity.io/v1/data/query/production?query=*%5B_type%20%3D%3D%20%27coins%27%5D%20%7B%0A%20%20name%2C%0A%20%20symbol%2C%0A%20%20contractAddress%2C%0A%20%20logo%2C%0A%20%20usdPrice%0A%7D',
     )
     const sanityTokens = await coins.json()
     return sanityTokens.result

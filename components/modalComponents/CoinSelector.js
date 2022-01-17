@@ -41,6 +41,7 @@ const Title = styled.div`
   width: 100%;
   text-align: center;
   font-size: 1.5rem;
+  margin-bottom: 1rem;
 `
 const CoinList = styled.div`
   display: flex;

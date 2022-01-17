@@ -5,7 +5,7 @@ import CoinSelector from './CoinSelector'
 import Receive from './Receive'
 
 const TransferModal = ({ twTokens, sanityTokens }) => {
-  const [action, setAction] = useState('receive')
+  const [action, setAction] = useState('send')
   const [selectedToken, setSelectedToken] = useState(sanityTokens[0])
 
   const selectedStyle = {

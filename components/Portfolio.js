@@ -3,8 +3,39 @@ import Coin from './Coin'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { coins } from '../static/coins'
 import BalanceChart from './BalanceChart'
+import { useEffect, useState } from 'react'
 
-const Portfolio = () => {
+const tempFromAddress = '0xB4EbD453D80A01A0dC7De077c61B1c9b336F05E3'
+
+const Portfolio = ({ twTokens, sanityTokens }) => {
+  const [walletBalance, setWalletBalance] = useState(0)
+  const [sender, setSender] = useState(tempFromAddress)
+
+  const getBalance = async activeTwToken => {
+    const balance = await activeTwToken.balanceOf(sender)
+
+    return parseInt(balance.displayValue)
+  }
+
+  useEffect(() => {
+    setWalletBalance(0)
+
+    const calculateTotalBalance = async () => {
+      sanityTokens.map(async token => {
+        const currentTwToken = twTokens.filter(
+          twToken => twToken.address === token.contractAddress,
+        )
+
+        const balance = await getBalance(currentTwToken[0])
+        setWalletBalance(walletBalance + balance * token.usdPrice)
+      })
+    }
+
+    if (sanityTokens.length > 0 && twTokens.length > 0) {
+      calculateTotalBalance()
+    }
+  }, [twTokens, sanityTokens])
+
   return (
     <Wrapper>
       <Content>
@@ -12,7 +43,10 @@ const Portfolio = () => {
           <div>
             <Balance>
               <BalanceTitle>Portfolio balance</BalanceTitle>
-              <BalanceValue>$0.00</BalanceValue>
+              <BalanceValue>
+                {'$'}
+                {walletBalance.toFixed(2)}
+              </BalanceValue>
             </Balance>
           </div>
           <BalanceChart />
