@@ -6,7 +6,13 @@ import Link from 'next/link'
 
 Modal.setAppElement('#__next')
 
-const Header = ({ twTokens, sanityTokens }) => {
+const Header = ({
+  twTokens,
+  sanityTokens,
+  walletAddress,
+  connectWallet,
+  disconnectWallet,
+}) => {
   const router = useRouter()
 
   const customStyles = {
@@ -29,6 +35,18 @@ const Header = ({ twTokens, sanityTokens }) => {
     <Wrapper>
       <Title>Assets</Title>
       <ButtonsContainer>
+        {walletAddress ? (
+          <WalletLink>
+            <p>Wallet Connected</p>
+            <div>
+              {walletAddress.slice(0, 4)}...{walletAddress.slice(36)}
+            </div>
+          </WalletLink>
+        ) : (
+          <Button onClick={() => connectWallet('injected')}>
+            Connect Wallet
+          </Button>
+        )}
         <Button style={{ backgroundColor: '#3773f5', color: '#000' }}>
           Buy / Sell
         </Button>
@@ -68,6 +86,12 @@ const Title = styled.div`
 
 const ButtonsContainer = styled.div`
   display: flex;
+`
+
+const WalletLink = styled.div`
+  font-size: 0.8rem;
+  border: 1px solid #282b2f;
+  border-radius: 50rem;
 `
 
 const Button = styled.div`

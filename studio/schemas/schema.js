@@ -36,5 +36,17 @@ export default createSchema({
         },
       ],
     },
+    {
+      title: 'Wallets',
+      name: 'wallets',
+      type: 'document',
+      fields: [
+        {
+          title: 'Address',
+          name: 'address',
+          type: 'string',
+        },
+      ],
+    },
   ]),
 })

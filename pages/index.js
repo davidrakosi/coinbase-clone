@@ -1,14 +1,17 @@
-import styled from 'styled-components'
 import Header from '../components/Header'
+import styled from 'styled-components'
 import Main from '../components/Main'
 import Sidebar from '../components/Sidebar'
 import { ThirdwebSDK } from '@3rdweb/sdk'
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 
+import { useWeb3 } from '@3rdweb/hooks'
+
 export default function Home({ data }) {
   const [twTokens, setTwTokens] = useState([])
   const [sanityTokens, setSanityTokens] = useState(data)
+  const { address, chainId, connectWallet, disconnectWallet } = useWeb3()
 
   useEffect(() => {
     const sdk = new ThirdwebSDK(
@@ -29,7 +32,13 @@ export default function Home({ data }) {
     <Wrapper>
       <Sidebar />
       <MainContainer>
-        <Header twTokens={twTokens} sanityTokens={sanityTokens} />
+        <Header
+          twTokens={twTokens}
+          sanityTokens={sanityTokens}
+          walletAddress={address}
+          connectWallet={connectWallet}
+          disconnectWallet={disconnectWallet}
+        />
         <Main twTokens={twTokens} sanityTokens={sanityTokens} />
       </MainContainer>
     </Wrapper>
