@@ -6,28 +6,12 @@ import { ThirdwebSDK } from '@3rdweb/sdk'
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 
-export default function Home() {
-  const [myToken, setMyToken] = useState(null)
+export default function Home({ data }) {
+  const [twTokens, setTwTokens] = useState([])
+  const [sanityTokens, setSanityTokens] = useState(data)
 
-  const sendCrypto = async () => {
-    const toAddress = '0x8Cd390f697ffDc176f1B70D2F3BB3083698434fD'
-    console.log('sending crypto')
-
-    if (myToken) {
-      console.log('object')
-      const result = await myToken.transfer(toAddress, '1000000000000000000')
-
-      console.log(result)
-    }
-  }
-
-  const getBalance = async () => {
-    console.log(myToken, '🔥')
-    const balance = await myToken.balanceOf(
-      '0xB4EbD453D80A01A0dC7De077c61B1c9b336F05E3',
-    )
-    console.log(await balance)
-  }
+  console.log('🤖', twTokens)
+  console.log('🛠️', sanityTokens)
 
   useEffect(() => {
     const sdk = new ThirdwebSDK(
@@ -37,35 +21,45 @@ export default function Home() {
       ),
     )
 
-    console.log(sdk)
+    data.map(tokenItem => {
+      const currentToken = sdk.getTokenModule(tokenItem.contractAddress)
 
-    const tokenId = '0x11Bdf1177E465D3a299FAD35051BFb553974cb3A' // CPT
-
-    const token = sdk.getTokenModule(tokenId)
-
-    setMyToken(token)
-
-    // console.log(token)
-
-    // getBalance(token)
+      setTwTokens(prevState => [...prevState, currentToken])
+    })
   }, [])
-
-  useEffect(() => {
-    if (myToken) {
-      console.log(Boolean(myToken), '🚀')
-      getBalance()
-    }
-  }, [myToken])
 
   return (
     <Wrapper>
       <Sidebar />
       <MainContainer>
-        <Header sendCrypto={sendCrypto} myToken={myToken} />
+        <Header twTokens={twTokens} sanityTokens={sanityTokens} />
         <Main />
       </MainContainer>
     </Wrapper>
   )
+}
+
+export async function getServerSideProps(context) {
+  console.log('server')
+
+  const getCoinsList = async () => {
+    console.log('sanity')
+    const coins = await fetch(
+      "https://u5i352de.api.sanity.io/v1/data/query/production?query=*%5B_type%20%3D%3D%20'coins'%5D%20%7B%0A%20%20name%2C%0A%20%20symbol%2C%0A%20%20contractAddress%2C%0A%20%20logo%0A%7D",
+    )
+    const sanityTokens = await coins.json()
+    return sanityTokens.result
+  }
+
+  try {
+    const data = await getCoinsList()
+
+    return {
+      props: { data },
+    }
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 const Wrapper = styled.div`

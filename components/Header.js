@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 Modal.setAppElement('#__next')
 
-const Header = ({ sendCrypto, myToken }) => {
+const Header = ({ twTokens, sanityTokens }) => {
   const router = useRouter()
 
   const customStyles = {
@@ -29,7 +29,6 @@ const Header = ({ sendCrypto, myToken }) => {
     <Wrapper>
       <Title>Assets</Title>
       <ButtonsContainer>
-        {/* <Button onClick={() => sendCrypto()}>Send / Receive</Button> */}
         <Button style={{ backgroundColor: '#3773f5', color: '#000' }}>
           Buy / Sell
         </Button>
@@ -45,7 +44,7 @@ const Header = ({ sendCrypto, myToken }) => {
         onRequestClose={() => router.push('/')}
         style={customStyles}
       >
-        <TransferModal myToken={myToken} />
+        <TransferModal twTokens={twTokens} sanityTokens={sanityTokens} />
       </Modal>
     </Wrapper>
   )
