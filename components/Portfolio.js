@@ -90,6 +90,7 @@ const Wrapper = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+  height: 100%;
 `
 const Content = styled.div`
   width: 100%;

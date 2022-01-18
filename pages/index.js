@@ -26,8 +26,8 @@ export default function Home() {
 
 const Wrapper = styled.div`
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
   background-color: #0a0b0d;
   color: white;
   display: grid;
