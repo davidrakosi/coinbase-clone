@@ -3,7 +3,18 @@ import { Line } from 'react-chartjs-2'
 import Chart from 'chart.js/auto'
 
 const data = {
-  labels: [65, 59, 80, 81, 56, 72, 45, 67, 55, 40],
+  labels: [
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Noz',
+    'Dec',
+    'Jan',
+  ],
   datasets: [
     {
       fill: false,
