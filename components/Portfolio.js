@@ -5,11 +5,9 @@ import { coins } from '../static/coins'
 import BalanceChart from './BalanceChart'
 import { useEffect, useState } from 'react'
 
-const tempFromAddress = '0xB4EbD453D80A01A0dC7De077c61B1c9b336F05E3'
-
-const Portfolio = ({ twTokens, sanityTokens }) => {
+const Portfolio = ({ twTokens, sanityTokens, walletAddress }) => {
   const [walletBalance, setWalletBalance] = useState(0)
-  const [sender, setSender] = useState(tempFromAddress)
+  const [sender] = useState(walletAddress)
 
   const getBalance = async activeTwToken => {
     const balance = await activeTwToken.balanceOf(sender)
@@ -45,7 +43,7 @@ const Portfolio = ({ twTokens, sanityTokens }) => {
               <BalanceTitle>Portfolio balance</BalanceTitle>
               <BalanceValue>
                 {'$'}
-                {walletBalance.toFixed(2)}
+                {walletBalance.toFixed(2).toLocaleString('en-US')}
               </BalanceValue>
             </Balance>
           </div>

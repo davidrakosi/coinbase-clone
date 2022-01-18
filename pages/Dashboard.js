@@ -53,7 +53,11 @@ const Dashboard = ({ address }) => {
           sanityTokens={sanityTokens}
           walletAddress={address}
         />
-        <Main twTokens={twTokens} sanityTokens={sanityTokens} />
+        <Main
+          twTokens={twTokens}
+          sanityTokens={sanityTokens}
+          walletAddress={address}
+        />
       </MainContainer>
     </Wrapper>
   )

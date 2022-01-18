@@ -4,7 +4,7 @@ import Transfer from './Transfer'
 import CoinSelector from './CoinSelector'
 import Receive from './Receive'
 
-const TransferModal = ({ twTokens, sanityTokens }) => {
+const TransferModal = ({ twTokens, sanityTokens, walletAddress }) => {
   const [action, setAction] = useState('send')
   const [selectedToken, setSelectedToken] = useState(sanityTokens[0])
 
@@ -24,10 +24,17 @@ const TransferModal = ({ twTokens, sanityTokens }) => {
           twTokens={twTokens}
           sanityTokens={sanityTokens}
           selectedToken={selectedToken}
+          walletAddress={walletAddress}
         />
       )
     } else if (action === 'receive') {
-      return <Receive setAction={setAction} selectedToken={selectedToken} />
+      return (
+        <Receive
+          setAction={setAction}
+          selectedToken={selectedToken}
+          walletAddress={walletAddress}
+        />
+      )
     } else if (action === 'select') {
       return (
         <CoinSelector

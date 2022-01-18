@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import imageUrlBuilder from '@sanity/image-url'
 import { client } from '../../lib/sanity'
-import { MdSafetyDivider } from 'react-icons/md'
 import { BiCopy } from 'react-icons/bi'
 import { FaCheck } from 'react-icons/fa'
 
-const Receive = ({ setAction, selectedToken }) => {
+const Receive = ({ setAction, selectedToken, walletAddress }) => {
   const [imageUrl, setImageUrl] = useState(null)
   const [copied, setCopied] = useState(false)
   const [builder] = useState(imageUrlBuilder(client))
@@ -21,7 +20,7 @@ const Receive = ({ setAction, selectedToken }) => {
       <Content>
         <QRContainer>
           <img
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${selectedToken.contractAddress}`}
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${walletAddress}`}
           />
         </QRContainer>
         <Divider />

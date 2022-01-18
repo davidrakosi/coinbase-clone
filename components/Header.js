@@ -56,7 +56,11 @@ const Header = ({ twTokens, sanityTokens, walletAddress, connectWallet }) => {
         onRequestClose={() => router.push('/')}
         style={customStyles}
       >
-        <TransferModal twTokens={twTokens} sanityTokens={sanityTokens} />
+        <TransferModal
+          twTokens={twTokens}
+          sanityTokens={sanityTokens}
+          walletAddress={walletAddress}
+        />
       </Modal>
     </Wrapper>
   )

@@ -4,13 +4,10 @@ import { useEffect, useState } from 'react'
 import imageUrlBuilder from '@sanity/image-url'
 import { client } from '../../lib/sanity'
 
-const tempFromAddress = '0xB4EbD453D80A01A0dC7De077c61B1c9b336F05E3'
-const tempToAddress = '0x8Cd390f697ffDc176f1B70D2F3BB3083698434fD'
-
-const Transfer = ({ setAction, twTokens, sanityTokens, selectedToken }) => {
+const Transfer = ({ setAction, twTokens, selectedToken, walletAddress }) => {
   const [amount, setAmount] = useState('')
-  const [recipient, setRecipient] = useState(tempToAddress)
-  const [sender, setSender] = useState(tempFromAddress)
+  const [recipient, setRecipient] = useState('')
+  const [sender] = useState(walletAddress)
   const [builder] = useState(imageUrlBuilder(client))
   const [activeTwToken, setActiveTwToken] = useState()
   const [imageUrl, setImageUrl] = useState(null)
