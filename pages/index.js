@@ -48,7 +48,6 @@ const Button = styled.div`
   font-size: 1.3rem;
   font-weight: 500;
   border-radius: 0.4rem;
-  margin-right: 1rem;
   background-color: #3773f5;
   color: #000;
 

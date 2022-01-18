@@ -65,7 +65,7 @@ const Header = ({ twTokens, sanityTokens, walletAddress, connectWallet }) => {
 export default Header
 
 const Wrapper = styled.div`
-  width: calc(100% - 3rem);
+  width: calc(100%);
   /* TRouBLe */
   padding: 1rem 1.5rem;
   border-bottom: 1px solid #282b2f;

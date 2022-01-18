@@ -44,16 +44,15 @@ const Transfer = ({ setAction, twTokens, sanityTokens, selectedToken }) => {
     console.log('sending crypto')
 
     if (activeTwToken && amount && recipient) {
-      console.log('object')
-      const result = await activeTwToken.transferFrom(
-        '0x8Cd390f697ffDc176f1B70D2F3BB3083698434fD',
+      setAction('transferring')
+      const result = await activeTwToken.transfer(
         recipient,
         amount.toString().concat('000000000000000000'),
       )
-
       console.log(result)
+      setAction('transferred')
     } else {
-      console.log('missing data')
+      console.error('missing data')
     }
   }
 
