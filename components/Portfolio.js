@@ -43,7 +43,7 @@ const Portfolio = ({ twTokens, sanityTokens, walletAddress }) => {
               <BalanceTitle>Portfolio balance</BalanceTitle>
               <BalanceValue>
                 {'$'}
-                {walletBalance.toFixed(2).toLocaleString('en-US')}
+                {walletBalance.toLocaleString('US')}
               </BalanceValue>
             </Balance>
           </div>

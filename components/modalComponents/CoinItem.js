@@ -103,8 +103,8 @@ const Icon = styled.div`
 
   & > img {
     /* margin: -0.5rem 1rem; */
-    height: 120%;
-    width: 120%;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
   }
 `
