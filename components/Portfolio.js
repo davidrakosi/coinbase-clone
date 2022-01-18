@@ -16,16 +16,16 @@ const Portfolio = ({ twTokens, sanityTokens, walletAddress }) => {
   }
 
   useEffect(() => {
-    setWalletBalance(0)
-
     const calculateTotalBalance = async () => {
+      setWalletBalance(0)
+
       sanityTokens.map(async token => {
         const currentTwToken = twTokens.filter(
           twToken => twToken.address === token.contractAddress,
         )
 
         const balance = await getBalance(currentTwToken[0])
-        setWalletBalance(walletBalance + balance * token.usdPrice)
+        setWalletBalance(prevState => prevState + balance * token.usdPrice)
       })
     }
 
