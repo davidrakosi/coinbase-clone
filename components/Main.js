@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import Portfolio from './Portfolio'
 import Promos from './Promos'
 
-const Main = () => {
+const Main = ({ twTokens, sanityTokens }) => {
   return (
     <Wrapper>
-      <Portfolio />
+      <Portfolio twTokens={twTokens} sanityTokens={sanityTokens} />
       <Promos />
     </Wrapper>
   )

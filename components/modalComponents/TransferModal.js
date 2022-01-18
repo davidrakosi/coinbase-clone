@@ -4,8 +4,9 @@ import Transfer from './Transfer'
 import CoinSelector from './CoinSelector'
 import Receive from './Receive'
 
-const TransferModal = ({ myToken }) => {
+const TransferModal = ({ twTokens, sanityTokens }) => {
   const [action, setAction] = useState('send')
+  const [selectedToken, setSelectedToken] = useState(sanityTokens[0])
 
   const selectedStyle = {
     color: '#3773f5',
@@ -17,11 +18,58 @@ const TransferModal = ({ myToken }) => {
 
   const renderLogic = () => {
     if (action === 'send') {
-      return <Transfer setAction={setAction} myToken={myToken} />
+      return (
+        <Transfer
+          setAction={setAction}
+          twTokens={twTokens}
+          sanityTokens={sanityTokens}
+          selectedToken={selectedToken}
+        />
+      )
     } else if (action === 'receive') {
-      return <Receive setAction={setAction} />
+      return <Receive setAction={setAction} selectedToken={selectedToken} />
     } else if (action === 'select') {
-      return <CoinSelector setAction={setAction} />
+      return (
+        <CoinSelector
+          setAction={setAction}
+          selectedToken={selectedToken}
+          setSelectedToken={setSelectedToken}
+          sanityTokens={sanityTokens}
+          twTokens={twTokens}
+        />
+      )
+    } else if (action === 'transferring') {
+      return (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '1.5rem',
+          }}
+        >
+          Transfer in progress...
+        </div>
+      )
+    } else if (action === 'transferred') {
+      return (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '2rem',
+            fontWeight: '600',
+            color: '#27ad75',
+          }}
+        >
+          Transfer complete
+        </div>
+      )
     }
   }
 

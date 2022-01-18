@@ -1,29 +1,58 @@
 import styled from 'styled-components'
 import { FaWallet } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
+import imageUrlBuilder from '@sanity/image-url'
+import { client } from '../../lib/sanity'
 
-const Transfer = ({ setAction, myToken }) => {
+const tempFromAddress = '0xB4EbD453D80A01A0dC7De077c61B1c9b336F05E3'
+const tempToAddress = '0x8Cd390f697ffDc176f1B70D2F3BB3083698434fD'
+
+const Transfer = ({ setAction, twTokens, sanityTokens, selectedToken }) => {
   const [amount, setAmount] = useState('')
-  const [recipient, setRecipient] = useState(
-    '0x8Cd390f697ffDc176f1B70D2F3BB3083698434fD',
-  )
+  const [recipient, setRecipient] = useState(tempToAddress)
+  const [sender, setSender] = useState(tempFromAddress)
+  const [builder] = useState(imageUrlBuilder(client))
+  const [activeTwToken, setActiveTwToken] = useState()
+  const [imageUrl, setImageUrl] = useState(null)
+  const [balance, setBalance] = useState('Fetching...')
 
-  //   console.log(amount, amount.toString().concat('000000000000000000'))
+  useEffect(() => {
+    twTokens.map(token => {
+      if (token.address === selectedToken.contractAddress) {
+        setActiveTwToken(token)
+      }
+    })
+  }, [twTokens, selectedToken])
+
+  useEffect(() => {
+    const getBalance = async () => {
+      const balance = await activeTwToken.balanceOf(sender)
+      setBalance(balance.displayValue)
+    }
+
+    if (activeTwToken) {
+      getBalance()
+    }
+  }, [activeTwToken])
+
+  useEffect(() => {
+    const url = builder.image(selectedToken.logo.asset._ref).url()
+    setImageUrl(url)
+  }, [selectedToken, builder])
 
   const sendCrypto = async () => {
-    // const toAddress = '0x8Cd390f697ffDc176f1B70D2F3BB3083698434fD'
     console.log('sending crypto')
 
-    if (myToken && amount && recipient) {
-      console.log('object')
-      const result = await myToken.transfer(
+    if (activeTwToken && amount && recipient) {
+      setAction('transferring')
+      const result = await activeTwToken.transfer(
         recipient,
         amount.toString().concat('000000000000000000'),
       )
-
       console.log(result)
+      setAction('transferred')
     } else {
-      console.log('missing data')
+      console.error('missing data')
     }
   }
 
@@ -37,7 +66,7 @@ const Transfer = ({ setAction, myToken }) => {
             value={amount}
             onChange={e => setAmount(e.target.value)}
           />
-          <span>CPT</span>
+          <span>{selectedToken.symbol}</span>
         </FlexInputContainer>
         <Warning style={{ color: amount && '#0a0b0d' }}>
           Amount is a required field
@@ -58,14 +87,22 @@ const Transfer = ({ setAction, myToken }) => {
         <Divider />
         <Row>
           <FieldName>Pay with</FieldName>
+          <CoinSelectList onClick={() => setAction('select')}>
+            <Icon>
+              <img src={imageUrl} alt={selectedToken.name} />
+            </Icon>
+            <CoinName>{selectedToken.name}</CoinName>
+          </CoinSelectList>
         </Row>
       </TransferForm>
       <Row>
         <Continue onClick={() => sendCrypto()}>Continue</Continue>
       </Row>
       <Row>
-        <BalanceTitle>CPT Balance</BalanceTitle>
-        <Balance>2000 CPT</Balance>
+        <BalanceTitle>{selectedToken.symbol} Balance</BalanceTitle>
+        <Balance>
+          {balance} {selectedToken.symbol}
+        </Balance>
       </Row>
     </Wrapper>
   )
@@ -94,10 +131,11 @@ const Amount = styled.div`
 const FlexInputContainer = styled.div`
   flex: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 
   & > span {
-    font-size: 4.5rem;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
     color: #3773f5;
   }
 `
@@ -141,11 +179,25 @@ const Row = styled.div`
   font-size: 1.2rem;
 `
 const FieldName = styled.div`
-  flex: 0.25;
+  flex: 0.5;
   padding-left: 2rem;
 `
+
 const Icon = styled.div`
-  margin: 0 2rem;
+  margin-right: 1rem;
+  height: 1.8rem;
+  width: 1.8rem;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+
+  & > img {
+    /* margin: -0.5rem 1rem; */
+    height: 120%;
+    width: 120%;
+    object-fit: cover;
+  }
 `
 
 const Recipient = styled.input`
@@ -156,6 +208,28 @@ const Recipient = styled.input`
   color: white;
   font-size: 1.2rem;
   text-wrap: wrap;
+  margin-right: 0.5rem;
+`
+
+const CoinSelectList = styled.div`
+  display: flex;
+  flex: 1.3;
+  height: 100%;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const CoinName = styled.div`
+  flex: 1;
+  border: none;
+  background: none;
+  outline: none;
+  color: white;
+  font-size: 1.2rem;
+  text-wrap: wrap;
+  margin-right: 0.5rem;
 `
 
 const Continue = styled.button`
