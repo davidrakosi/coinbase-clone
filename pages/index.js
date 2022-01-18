@@ -1,68 +1,27 @@
-import Header from '../components/Header'
 import styled from 'styled-components'
-import Main from '../components/Main'
-import Sidebar from '../components/Sidebar'
-import { ThirdwebSDK } from '@3rdweb/sdk'
-import { ethers } from 'ethers'
-import { useEffect, useState } from 'react'
-
 import { useWeb3 } from '@3rdweb/hooks'
+import Dashboard from './Dashboard'
 
-export default function Home({ data }) {
-  const [twTokens, setTwTokens] = useState([])
-  const [sanityTokens, setSanityTokens] = useState(data)
-  const { address, chainId, connectWallet, disconnectWallet } = useWeb3()
-
-  useEffect(() => {
-    const sdk = new ThirdwebSDK(
-      new ethers.Wallet(
-        process.env.NEXT_PUBLIC_PRIVATE_KEY,
-        ethers.getDefaultProvider('https://rpc-mumbai.maticvigil.com'),
-      ),
-    )
-
-    data.map(tokenItem => {
-      const currentToken = sdk.getTokenModule(tokenItem.contractAddress)
-
-      setTwTokens(prevState => [...prevState, currentToken])
-    })
-  }, [])
+export default function Home() {
+  const { address, connectWallet } = useWeb3()
 
   return (
     <Wrapper>
-      <Sidebar />
-      <MainContainer>
-        <Header
-          twTokens={twTokens}
-          sanityTokens={sanityTokens}
-          walletAddress={address}
-          connectWallet={connectWallet}
-          disconnectWallet={disconnectWallet}
-        />
-        <Main twTokens={twTokens} sanityTokens={sanityTokens} />
-      </MainContainer>
+      {address ? (
+        <Dashboard address={address} />
+      ) : (
+        <WalletConnect>
+          <Button onClick={() => connectWallet('injected')}>
+            Connect Wallet
+          </Button>
+          <Details>
+            You need Chrome to be
+            <br /> able to run this app.
+          </Details>
+        </WalletConnect>
+      )}
     </Wrapper>
   )
-}
-
-export async function getServerSideProps(context) {
-  const getCoinsList = async () => {
-    const coins = await fetch(
-      'https://u5i352de.api.sanity.io/v1/data/query/production?query=*%5B_type%20%3D%3D%20%27coins%27%5D%20%7B%0A%20%20name%2C%0A%20%20symbol%2C%0A%20%20contractAddress%2C%0A%20%20logo%2C%0A%20%20usdPrice%0A%7D',
-    )
-    const sanityTokens = await coins.json()
-    return sanityTokens.result
-  }
-
-  try {
-    const data = await getCoinsList()
-
-    return {
-      props: { data },
-    }
-  } catch (error) {
-    console.error(error)
-  }
 }
 
 const Wrapper = styled.div`
@@ -71,8 +30,37 @@ const Wrapper = styled.div`
   width: 100vw;
   background-color: #0a0b0d;
   color: white;
+  display: grid;
+  place-items: center;
 `
 
-const MainContainer = styled.div`
-  flex: 1;
+const WalletConnect = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const Button = styled.div`
+  /* flex: 0; */
+  border: 1px solid #282b2f;
+  padding: 0.8rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  border-radius: 0.4rem;
+  margin-right: 1rem;
+  background-color: #3773f5;
+  color: #000;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const Details = styled.div`
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+  color: #282b2f;
 `

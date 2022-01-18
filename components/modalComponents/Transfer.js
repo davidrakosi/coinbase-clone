@@ -16,9 +16,6 @@ const Transfer = ({ setAction, twTokens, sanityTokens, selectedToken }) => {
   const [imageUrl, setImageUrl] = useState(null)
   const [balance, setBalance] = useState('Fetching...')
 
-  console.log('🤖', twTokens)
-  console.log('🚀', sanityTokens)
-
   useEffect(() => {
     twTokens.map(token => {
       if (token.address === selectedToken.contractAddress) {
@@ -48,7 +45,8 @@ const Transfer = ({ setAction, twTokens, sanityTokens, selectedToken }) => {
 
     if (activeTwToken && amount && recipient) {
       console.log('object')
-      const result = await activeTwToken.transfer(
+      const result = await activeTwToken.transferFrom(
+        '0x8Cd390f697ffDc176f1B70D2F3BB3083698434fD',
         recipient,
         amount.toString().concat('000000000000000000'),
       )
