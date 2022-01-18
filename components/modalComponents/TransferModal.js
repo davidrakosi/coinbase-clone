@@ -43,6 +43,7 @@ const TransferModal = ({ twTokens, sanityTokens, walletAddress }) => {
           setSelectedToken={setSelectedToken}
           sanityTokens={sanityTokens}
           twTokens={twTokens}
+          walletAddress={walletAddress}
         />
       )
     } else if (action === 'transferring') {

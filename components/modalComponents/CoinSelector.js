@@ -10,8 +10,9 @@ const CoinSelector = ({
   setSelectedToken,
   sanityTokens,
   twTokens,
+  walletAddress,
 }) => {
-  const [sender, setSender] = useState(tempFromAddress)
+  const [sender] = useState(walletAddress)
 
   return (
     <Wrapper>
