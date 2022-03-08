@@ -12,7 +12,7 @@
   resolved "https://registry.yarnpkg.com/@3rdweb/contracts/-/contracts-1.22.0.tgz#32d97a0b5029a56cc39b03dfd25065ae0d4c7cd5"
   integrity sha512-92c+hJ/9GVmc24RunuO4Flp9i8EVa6MoY6T5oF8kZTv9m4cwk6L9jO3hs9g9H5zj/wuDEU4XvwHGk2ez3JJ5fg==
 
-"@3rdweb/hooks@^1", "@3rdweb/hooks@^1.4.0", "@3rdweb/hooks@^1.8.0":
+"@3rdweb/hooks@^1", "@3rdweb/hooks@^1.4.0":
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/@3rdweb/hooks/-/hooks-1.8.0.tgz#51075f130b664d0d13cb338a81f1011c4864a052"
   integrity sha512-3R6ioApvaDqfjhmKUJxE0t2Aduhm2bLx4mAHOsRk0dEpCsDyY0ldmNmSOizX6mH0y9N9r/oXhKNRVCliWEyvKA==
@@ -25,6 +25,22 @@
     "@web3-react/injected-connector" "^6.0.7"
     "@web3-react/magic-connector" "^6.1.9"
     "@web3-react/walletconnect-connector" "^6.2.8"
+    "@web3-react/walletlink-connector" "^6.2.8"
+    regenerator-runtime "^0.13.9"
+    tiny-invariant "^1.2.0"
+
+"@3rdweb/hooks@^1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@3rdweb/hooks/-/hooks-1.9.2.tgz#0a134eb93096b5ff8e5fd7e59a8f01845cc77104"
+  integrity sha512-JKvQKSB0ombfCso7PET6tUkueXwjppOfxKaFGk3aoJahkzAOx5eN3QFKzkjOZu/Qd+D8EnvixU8EkF3c2seP0A==
+  dependencies:
+    "@3rdweb/chain-icons" "^1.0.1"
+    "@ethersproject/providers" "^5.5.0"
+    "@ethersproject/units" "^5.5.0"
+    "@web3-react/core" "^6.1.9"
+    "@web3-react/injected-connector" "^6.0.7"
+    "@web3-react/magic-connector" "^6.1.9"
+    "@web3-react/walletconnect-connector" "6.2.8"
     "@web3-react/walletlink-connector" "^6.2.8"
     regenerator-runtime "^0.13.9"
     tiny-invariant "^1.2.0"
@@ -2895,7 +2911,7 @@
   resolved "https://registry.yarnpkg.com/@web3-react/types/-/types-6.0.7.tgz#34a6204224467eedc6123abaf55fbb6baeb2809f"
   integrity sha512-ofGmfDhxmNT1/P/MgVa8IKSkCStFiyvXe+U5tyZurKdrtTDFU+wJ/LxClPDtFerWpczNFPUSrKcuhfPX1sI6+A==
 
-"@web3-react/walletconnect-connector@^6.2.8":
+"@web3-react/walletconnect-connector@6.2.8", "@web3-react/walletconnect-connector@^6.2.8":
   version "6.2.8"
   resolved "https://registry.yarnpkg.com/@web3-react/walletconnect-connector/-/walletconnect-connector-6.2.8.tgz#069d27df226464775de25248e71e8c407c374cc7"
   integrity sha512-HENFuGw+inlYHPdZc1vKKVVYzJ/h/JJIXZVzXC2UPQ+c14cX1t0WSnQ7ywUYHkgRqYWMsngTDZTKRMU2+4O1Tg==
