@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@3rdweb/hooks": "^1.8.0",
-    "@3rdweb/react": "^1.8.1",
+    "@3rdweb/react": "^1.9.3",
     "@3rdweb/sdk": "^1.35.0",
     "@sanity/client": "^2.23.2",
     "@sanity/image-url": "^1.0.1",
