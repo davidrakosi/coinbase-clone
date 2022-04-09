@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@3rdweb/chain-icons/-/chain-icons-1.0.1.tgz#00ade9274dc87488c59248350981f300d4a9d912"
   integrity sha512-573b0CmKwi9Vf8ETRjNX8VzSqc9s1cwMu5pw7yUI2YTuBimgd15Hu/prnfyZ5efrIZUPDCJVaqNAc6v3fuGmzA==
 
-"@3rdweb/contracts@^1.21.1":
-  version "1.22.0"
-  resolved "https://registry.yarnpkg.com/@3rdweb/contracts/-/contracts-1.22.0.tgz#32d97a0b5029a56cc39b03dfd25065ae0d4c7cd5"
-  integrity sha512-92c+hJ/9GVmc24RunuO4Flp9i8EVa6MoY6T5oF8kZTv9m4cwk6L9jO3hs9g9H5zj/wuDEU4XvwHGk2ez3JJ5fg==
+"@3rdweb/contracts@1.26.2":
+  version "1.26.2"
+  resolved "https://registry.yarnpkg.com/@3rdweb/contracts/-/contracts-1.26.2.tgz#36f91f58265c668a47afbd077f566905587d5811"
+  integrity sha512-h/nwiH9nVHRgB+PYiLc5MLsas8TR0x/jPKI9a6wsSqFsGry/w/1MsN1HYplZR6i5j5LC+WomXNX7tjRyjGHoog==
 
 "@3rdweb/hooks@^1", "@3rdweb/hooks@^1.4.0", "@3rdweb/hooks@^1.8.0":
   version "1.8.0"
@@ -43,12 +43,12 @@
     framer-motion "^5.3.0"
     react-icons "^4.3.1"
 
-"@3rdweb/sdk@^1.35.0":
-  version "1.35.0"
-  resolved "https://registry.yarnpkg.com/@3rdweb/sdk/-/sdk-1.35.0.tgz#dd3b0f88f4970b5ef0cbeaadd36fa7d616d114b1"
-  integrity sha512-n8pnwboAaKjJjpv68SeLagpHMo57KcO1Y1s2m0cpN8EfbV1smzrW7qnvXLNQk96YUynENYEbFCQNhervKiVihQ==
+"@3rdweb/sdk@^1.42.0":
+  version "1.42.0"
+  resolved "https://registry.yarnpkg.com/@3rdweb/sdk/-/sdk-1.42.0.tgz#6b6bf0f04924d0291df0ebb0b848b9ed22a66511"
+  integrity sha512-uPVtc6pCGcXUmXULgUBkwBvZJcDPZN6Jk6Nsvr7OJVh+AFc8Em36L+uYH6wnv/44/hA3y9H1aHgC+ippXxJgvQ==
   dependencies:
-    "@3rdweb/contracts" "^1.21.1"
+    "@3rdweb/contracts" "1.26.2"
     "@ethersproject/bignumber" "^5.5.0"
     "@ethersproject/bytes" "^5.4.0"
     "@ethersproject/constants" "^5.5.0"
@@ -58,8 +58,8 @@
     "@web-std/file" "^3.0.0"
     browser-or-node "^2.0.0"
     crypto-js "^4.1.1"
-    eth-permit "^0.2.1"
     ethers "^5.5.2"
+    eventemitter2 "^6.4.5"
     events "^3.3.0"
     form-data "^4.0.0"
     json2typescript "^1.5.0-rc.0"
@@ -4210,13 +4210,6 @@ eth-lib@0.2.8:
     elliptic "^6.4.0"
     xhr-request-promise "^0.1.2"
 
-eth-permit@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/eth-permit/-/eth-permit-0.2.1.tgz#360bbf33bfeb70ad212e9cfa820370e8f827bdff"
-  integrity sha512-+a91Il8JDsKXnib6a5CWEwBc9OOR93IYM1GRGlcnEa+NwMHkWLg4P8lyEHnUmoMVfjutoQTz8wnEWr5Y+k3QOQ==
-  dependencies:
-    utf8 "^3.0.0"
-
 eth-query@^2.1.0, eth-query@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/eth-query/-/eth-query-2.1.2.tgz#d6741d9000106b51510c72db92d6365456a6da5e"
@@ -4377,6 +4370,11 @@ ethjs-util@0.1.6, ethjs-util@^0.1.3:
   dependencies:
     is-hex-prefixed "1.0.0"
     strip-hex-prefix "1.0.0"
+
+eventemitter2@^6.4.5:
+  version "6.4.5"
+  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-6.4.5.tgz#97380f758ae24ac15df8353e0cc27f8b95644655"
+  integrity sha512-bXE7Dyc1i6oQElDG0jMRZJrRAn9QR2xyyFGmBdZleNmyQX0FqGYmhZIrIrpPfm/w//LTo4tVQGOGQcGCb5q9uw==
 
 eventemitter3@4.0.4:
   version "4.0.4"
@@ -6741,7 +6739,7 @@ utf-8-validate@^5.0.2:
   dependencies:
     node-gyp-build "^4.3.0"
 
-utf8@3.0.0, utf8@^3.0.0:
+utf8@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/utf8/-/utf8-3.0.0.tgz#f052eed1364d696e769ef058b183df88c87f69d1"
   integrity sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==
