@@ -14,7 +14,7 @@
     "@sanity/client": "^2.23.2",
     "@sanity/image-url": "^1.0.1",
     "@svgr/webpack": "^6.2.0",
-    "babel-plugin-styled-components": "^2.0.2",
+    "babel-plugin-styled-components": "^2.0.6",
     "chart.js": "^3.7.0",
     "crypto-icons": "^1.0.65",
     "cryptocurrency-icons": "^0.18.0",
